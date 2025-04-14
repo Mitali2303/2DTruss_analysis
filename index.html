@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced 2D Truss Analysis Tool</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.2.3/math.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Enhanced 2D Truss Analysis Tool</h1>
+        <p>Analyze forces in any 2D truss structure with support for expressions</p>
+    </header>
+
+    <main>
+        <section id="input-section">
+            <h2>Input Parameters</h2>
+            <div class="input-group">
+                <label for="nodes">Nodes (x, y):</label>
+                <textarea id="nodes" placeholder="Format: x1,y1; x2,y2; x3,y3; ..."></textarea>
+                <small>Example: 0,0; 5,0; 5,5; 0,5 or expressions like 0,0; 5,0; 5,5*sqrt(2); 2*(3^0.5),4</small>
+                <!-- Angular node button will be added here by JS -->
+            </div>
+            <div class="input-group">
+                <label for="elements">Elements (Node Connections):</label>
+                <textarea id="elements" placeholder="Format: node1-node2; node3-node4; ..."></textarea>
+                <small>Example: 0-1; 1-2; 2-3; 3-0; 0-2</small>
+            </div>
+            <div class="input-group">
+                <label for="supports">Supports (Node, Type, Direction):</label>
+                <textarea id="supports" placeholder="Format: node,type,direction"></textarea>
+                <small>Example: 0,pin; 1,roller,y (direction only needed for rollers)</small>
+            </div>
+            <div class="input-group">
+                <label for="loads">Loads (Node, Fx, Fy):</label>
+                <textarea id="loads" placeholder="Format: node,fx,fy"></textarea>
+                <small>Example: 2,0,-75; 3,-120,0 (expressions allowed: 3,0,-8*sqrt(2))</small>
+            </div>
+            <button id="analyze-btn">Analyze Truss</button>
+        </section>
+
+        <section id="visualization-section">
+            <h2>Input Visualization</h2>
+            <canvas id="input-canvas" width="600" height="400"></canvas>
+            
+            <h2>Results Visualization</h2>
+            <canvas id="results-canvas" width="600" height="400"></canvas>
+        </section>
+
+        <section id="results-section">
+            <h2>Member Forces</h2>
+            <div id="results"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Enhanced Truss Analysis Tool | College Project</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.2.3/math.js"></script>
+</body>
+</html>
