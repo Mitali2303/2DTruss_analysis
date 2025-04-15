@@ -669,7 +669,6 @@ function visualizeInput(nodes, elements, supports, loads) {
 }
 
 
-
 function visualizeResults(nodes, elements, forces) {
     const canvas = document.getElementById("results-canvas");
     const ctx = canvas.getContext("2d");
