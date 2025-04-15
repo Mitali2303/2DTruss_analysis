@@ -515,7 +515,7 @@ function displayResults(forces, elements) {
         div.className = `result-card ${force > 0 ? 'tension' : 'compression'}`;
         div.innerHTML = `
             <strong>Member ${i+1} (${node1}-${node2}):</strong><br>
-            ${Math.abs(force/1000).toFixed(2)} kN ${force > 0 ? 'Tension' : 'Compression'}
+            ${Math.abs(force/1000).toFixed(5)} kN ${force > 0 ? 'Tension' : 'Compression'}
         `;
         resultsDiv.appendChild(div);
     });
@@ -669,77 +669,6 @@ function visualizeInput(nodes, elements, supports, loads) {
 }
 
 
-
-// function visualizeResults(nodes, elements, forces) {
-//     const canvas = document.getElementById("results-canvas");
-//     const ctx = canvas.getContext("2d");
-
-//     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-//     let minX = Math.min(...nodes.map(n => n[0]));
-//     let maxX = Math.max(...nodes.map(n => n[0]));
-//     let minY = Math.min(...nodes.map(n => n[1]));
-//     let maxY = Math.max(...nodes.map(n => n[1]));
-
-//     const padding = 50;
-//     const rangeX = maxX - minX;
-//     const rangeY = maxY - minY;
-//     const scaleX = rangeX === 0 ? 1 : (canvas.width - 2 * padding) / rangeX;
-//     const scaleY = rangeY === 0 ? 1 : (canvas.height - 2 * padding) / rangeY;
-//     const scale = Math.min(scaleX, scaleY);
-//     const offsetX = padding + (canvas.width - 2 * padding - scale * rangeX) / 2;
-//     const offsetY = padding + (canvas.height - 2 * padding - scale * rangeY) / 2;
-
-//     const transform = (x, y) => [
-//         offsetX + scale * (x - minX),
-//         canvas.height - (offsetY + scale * (y - minY))
-//     ];
-
-//     const maxForce = Math.max(...forces.map(f => Math.abs(f)));
-
-//     elements.forEach(([i, j], index) => {
-//         const [x1, y1] = transform(...nodes[i]);
-//         const [x2, y2] = transform(...nodes[j]);
-//         const force = forces[index];
-
-//         ctx.strokeStyle = force > 0 ? 'blue' : 'red';
-//         const relativeForce = Math.abs(force) / maxForce;
-//         ctx.lineWidth = 2 + relativeForce * 8;
-
-//         ctx.beginPath();
-//         ctx.moveTo(x1, y1);
-//         ctx.lineTo(x2, y2);
-//         ctx.stroke();
-
-//         const midX = (x1 + x2) / 2;
-//         const midY = (y1 + y2) / 2;
-
-//         ctx.fillStyle = ctx.strokeStyle;
-//         ctx.font = 'bold 14px Arial';
-//         ctx.fillText(`${Math.abs(force / 1000).toFixed(1)} kN`, midX + 5, midY - 5);
-//         ctx.fillText(`(${index + 1})`, midX + 5, midY + 15);
-//     });
-
-//     ctx.fillStyle = 'black';
-//     nodes.forEach(([x, y], i) => {
-//         const [tx, ty] = transform(x, y);
-//         ctx.beginPath();
-//         ctx.arc(tx, ty, 6, 0, 2 * Math.PI);
-//         ctx.fill();
-
-//         ctx.font = '16px Arial';
-//         ctx.fillText(String.fromCharCode(65 + i), tx + 10, ty + 5);
-//     });
-
-//     // Clean legend - moved to top-right corner
-//     ctx.font = 'bold 14px Arial';
-
-//     ctx.fillStyle = 'blue';
-//     ctx.fillText('Tension', canvas.width - 120, 30);
-
-//     ctx.fillStyle = 'red';
-//     ctx.fillText('Compression', canvas.width - 120, 55);
-// }
 
 function visualizeResults(nodes, elements, forces) {
     const canvas = document.getElementById("results-canvas");
